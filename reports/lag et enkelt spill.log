@@ -1,0 +1,69 @@
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/nbclient/client.py", line 1087, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/nbclient/util.py", line 74, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/nbclient/util.py", line 53, in just_run
+    return loop.run_until_complete(coro)
+  File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/nbclient/client.py", line 540, in async_execute
+    await self.async_execute_cell(
+  File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/nbclient/client.py", line 832, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/nbclient/client.py", line 740, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply['content'])
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import random # Her importerer vi en modul med funksjoner som vi skal bruke i programmet vårt.
+
+antall_forsok = 0 # Dette er en variabel hvor vi lagrer antall ganger spilleren har gjettet.
+
+print("Hei, hva heter du?")
+spillernavn = input() # Vi henter spillerens navn, og lagrer det i en variabel.
+
+tall = random.randint(1, 20) # Nå plukker vi et tilfeldig tall mellom 1 og 20.
+print("Ok {}, jeg tenker på et tall mellom 1 og 20.".format(spillernavn))
+
+for antall_forsok in range(6): # Vi gir spilleren 6 forsøk på å gjette riktig.
+    print("Gjett hvilket tall det er:")
+    gjettet = input() # Venter på at spilleren skal taste inn et tall.
+    gjettet = int(gjettet) # Gjør om til heltall (hva skjer om spilleren taster inn noe annet?).
+
+    if gjettet < tall: # Gjettet spilleren lavere enn tallet vårt?
+        print("Du gjettet {}, men det er for lavt {}.".format(gjettet, spillernavn))
+    elif gjettet > tall: # Gjettet spilleren høyere enn tallet vårt?
+        print("Du gjettet {}, men det er for høyt {}.".format(gjettet, spillernavn))
+    else: # Ikke for lavt og ikke for høyt, da må det være riktig!
+        break # Hopper ut av loopen.
+
+# Her er for-loopen ferdig, legg merke til innrykket på linjene nedenfor.
+
+if gjettet == tall: # Sammenlikner det spilleren gjettet med det vi tenkte på. Er tallene like?
+    print("Wow {}, du gjettet riktig på {} forsøk.".format(spillernavn, antall_forsok))
+else: # Dersom tallen ikke var like, så må de være ulike.
+    print("Dette var litt for vanskelig. Jeg tenkte på tallet {}.".format(tall))
+
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mStdinNotImplementedError[0m                  Traceback (most recent call last)
+[0;32m<ipython-input-1-18747f17969b>[0m in [0;36m<module>[0;34m[0m
+[1;32m      4[0m [0;34m[0m[0m
+[1;32m      5[0m [0mprint[0m[0;34m([0m[0;34m"Hei, hva heter du?"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 6[0;31m [0mspillernavn[0m [0;34m=[0m [0minput[0m[0;34m([0m[0;34m)[0m [0;31m# Vi henter spillerens navn, og lagrer det i en variabel.[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      7[0m [0;34m[0m[0m
+[1;32m      8[0m [0mtall[0m [0;34m=[0m [0mrandom[0m[0;34m.[0m[0mrandint[0m[0;34m([0m[0;36m1[0m[0;34m,[0m [0;36m20[0m[0;34m)[0m [0;31m# Nå plukker vi et tilfeldig tall mellom 1 og 20.[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/Library/Python/3.8/lib/python/site-packages/ipykernel/kernelbase.py[0m in [0;36mraw_input[0;34m(self, prompt)[0m
+[1;32m    855[0m         """
+[1;32m    856[0m         [0;32mif[0m [0;32mnot[0m [0mself[0m[0;34m.[0m[0m_allow_stdin[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 857[0;31m             raise StdinNotImplementedError(
+[0m[1;32m    858[0m                 [0;34m"raw_input was called, but this frontend does not support input requests."[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    859[0m             )
+
+[0;31mStdinNotImplementedError[0m: raw_input was called, but this frontend does not support input requests.
+StdinNotImplementedError: raw_input was called, but this frontend does not support input requests.
+
